@@ -1,7 +1,7 @@
 {
     "name": "zfbase/zfvalidators",
     "description": "Collection of validators for common cases",
-    "keywords": ["zend", "zend validators"],
+    "keywords": ["zend", "zend validators", "инн", "кпп", "огрн", "окпо", "снилс"],
     "type": "library",
     "require": {
         "zendframework/zendframework1": "~1"
