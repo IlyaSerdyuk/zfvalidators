@@ -1,0 +1,22 @@
+{
+    "name": "zfbase/zfvalidators",
+    "description": "Collection of validators for common cases",
+    "keywords": ["zend", "zend validators"],
+    "type": "library",
+    "require": {
+        "zendframework/zendframework1": "~1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ilya Serdyuk",
+            "email": "ilya@serdyuk.pro"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "ZFValidators_": "library/"
+        }
+    },
+    "minimum-stability": "dev"
+}
