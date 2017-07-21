@@ -1,22 +1,25 @@
 {
-    "name": "zfbase/zfvalidators",
+    "name": "ilyaserdyuk/zfvalidators",
+    "type": "library",
     "description": "Collection of validators for common cases",
     "keywords": ["zend", "zend validators", "инн", "кпп", "огрн", "окпо", "снилс"],
-    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {"name": "Ilya Serdyuk", "email": "ilya@serdyuk.pro"}
+    ],
     "require": {
         "zendframework/zendframework1": "~1"
     },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Ilya Serdyuk",
-            "email": "ilya@serdyuk.pro"
-        }
-    ],
     "autoload": {
         "psr-0": {
             "ZFValidators_": "library/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
 }

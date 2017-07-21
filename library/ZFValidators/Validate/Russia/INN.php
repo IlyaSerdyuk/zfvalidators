@@ -1,21 +1,21 @@
 <?php
 /**
  * Collection of validators for common cases
- * 
+ *
  * The MIT License (MIT)
- * 
+ *
  * Copyright (c) 2016 Ilya Serdyuk <ilya@serdyuk.pro>
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,57 +28,57 @@
 /**
  * Валидатор ИНН (идентификационный номер налогоплательщика),
  * применяемого в налоговой системе Российской Федерации
- * 
+ *
  * ВНИМАНИЕ! Валидатор проверят только формальную корректность ИНН.
  * Для проверки существования ИНН необходимо воспользоваться государственными сервисом.
- * 
+ *
  * @see https://ru.wikipedia.org/wiki/Идентификационный_номер_налогоплательщика
  */
 class ZFValidators_Validate_Russia_INN extends Zend_Validate_Abstract
 {
-    
+
     const INVALID = 'ruInnInvalid';
-    
+
     protected $_messageTemplates = array(
         self::INVALID => "'%value%' is not a INN"
     );
-    
+
     /**
      * Это корректный ИНН?
-     * 
+     *
      * @param string $value
      * @return boolean
      */
     public function isValid($value)
     {
         $this->_setValue($value);
-        
-        
+
+
         if ($this->isPerson($value)) {
             return true;
         }
-        
+
         if ($this->isCompany($value)) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * Это ИНН физического лица или индивидуального предпринимателя?
-     * 
+     *
      * @param string $value
      * @return boolean
      */
     public function isPerson($value)
     {
         $value = (string) $value;
-        
+
         if (1 != preg_match('/^[0-9]{12}$/', $value)) {
             return false;
         }
-        
+
         // Проверка первой контрольной цифры
         $c1 = $value[0] * 7
             + $value[1] * 2
@@ -93,7 +93,7 @@ class ZFValidators_Validate_Russia_INN extends Zend_Validate_Abstract
         if (($c1 % 11) % 10 != intval($value[10])) {
             return false;
         }
-        
+
         // Проверка второй контрольной цифры
         $c2 = $value[0] * 3
             + $value[1] * 7
@@ -109,24 +109,24 @@ class ZFValidators_Validate_Russia_INN extends Zend_Validate_Abstract
         if (($c2 % 11) % 10 != intval($value[11])) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     /**
      * Это ИНН юридического лица?
-     * 
+     *
      * @param string $value
      * @return boolean
      */
     public function isCompany($value)
     {
         $value = (string) $value;
-        
+
         if (1 != preg_match('/^[0-9]{10}$/', $value)) {
             return false;
         }
-        
+
         // Проверка контрольной цифры
         $c1 = $value[0] * 2
             + $value[1] * 4
@@ -140,8 +140,8 @@ class ZFValidators_Validate_Russia_INN extends Zend_Validate_Abstract
         if (($c1 % 11) % 10 != intval($value[9])) {
             return false;
         }
-        
+
         return true;
     }
-    
+
 }
